@@ -42,6 +42,7 @@
 				<div id="mainNavbar" class="collapse navbar-collapse">
 					<ul class="nav navbar-nav">
 						<li <?= isSelected($pageName, 'Home') ?> ><a href="<?= BASE_URL ?>/">Home</a></li>
+						<li <?= isSelected($pageName, 'About') ?> ><a href="<?= BASE_URL ?>/about">About</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<!-- We want to filter what elements we have in our navigation bar based on if we are signed in or not. -->

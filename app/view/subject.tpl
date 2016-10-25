@@ -25,7 +25,7 @@
 <!-- Only allow someone to add a post if they're signed in. -->
 <?php
 	if(isset($_SESSION['user'])) {
-		echo '<button class="btn btn-default" data-toggle="modal" data-target="#add-topic-modal">Add Topic</button>';
+		echo '<button class="btn btn-default" data-toggle="modal" data-target="#add-topic-modal" style="margin-bottom:32px;">Add Topic</button>';
 	}
 ?>
 

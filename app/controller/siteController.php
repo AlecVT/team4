@@ -18,6 +18,9 @@ class SiteController {
 			case 'home':
 				$this->home();
 				break;
+			case 'about':
+				$this->about();
+				break;
 			case 'login':
 				$email = $_POST['email'];
 				$password = $_POST['password'];
@@ -45,6 +48,14 @@ class SiteController {
 
 		include_once SYSTEM_PATH.'/view/header.tpl';
 		include_once SYSTEM_PATH.'/view/home.tpl';
+		include_once SYSTEM_PATH.'/view/footer.tpl';
+	}
+
+	public function about() {
+		$pageName = 'About';
+
+		include_once SYSTEM_PATH.'/view/header.tpl';
+		include_once SYSTEM_PATH.'/view/about.tpl';
 		include_once SYSTEM_PATH.'/view/footer.tpl';
 	}
 

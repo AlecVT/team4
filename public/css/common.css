@@ -70,6 +70,12 @@ h2 { font-size: 1.5em; }
 	vertical-align: bottom;
 	cursor: pointer;
 }
+/* The panel for comments is a little different. */
+.comment {
+	height: 128px;
+	width: 100%;
+	cursor: default;
+}
 
 /* For the smallest window size. */
 @media (max-width: 767px) {

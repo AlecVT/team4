@@ -7,12 +7,14 @@ RewriteEngine on
 # Site
 
 RewriteRule ^$ app/controller/siteController.php?action=home [QSA,L]
+RewriteRule ^about/?$ app/controller/siteController.php?action=about [QSA,L]
 RewriteRule ^login/?$ app/controller/siteController.php?action=login [QSA,L]
 RewriteRule ^logout/?$ app/controller/siteController.php?action=logout [QSA,L]
 
 # Subject
 
 RewriteRule ^subject/(\d+)/?$ app/controller/subjectController.php?action=subject&pid=$1 [QSA,L]
+RewriteRule ^post/delete/(\d+)/?$ app/controller/subjectController.php?action=deletePost&pid=$1 [QSA,L]
 RewriteRule ^post/(\d+)/?$ app/controller/subjectController.php?action=post&pid=$1 [QSA,L]
 RewriteRule ^post/add/?$ app/controller/subjectController.php?action=addPost [QSA,L]
 RewriteRule ^post/edit/(\d+)/?$ app/controller/subjectController.php?action=editPost&pid=$1 [QSA,L]

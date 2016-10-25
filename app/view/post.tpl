@@ -3,11 +3,13 @@
 <?php
 	if(isset($_SESSION['user'])) {
 		echo '<button class="btn btn-warning" data-toggle="modal" data-target="#edit-topic-modal" style="float:left;margin-left:16px;">Edit Topic</button>';
+		echo '<button id="delete-post-button" class="btn btn-danger" type="submit" style="float:left;margin-left:16px;">Delete</button>';
 	}
 ?>
 <br>
 
 <h1><?= $post['title'] ?></h1>
+<h2><u><b>Topic:</b></u> <?= $post['description'] ?></h2>
 <h2>Here, if you want to, you can contribute by commenting your own response below.</h2>
 
 <!-- If there are no posts under this subject, display a message. -->
@@ -18,7 +20,7 @@
 <!-- For each comment under the specific post ID, output it. -->
 <div class="panel-group">
 	<?php while($row = mysql_fetch_assoc($result)): ?>
-		<div name="<?= $row['id'] ?>" class="panel panel-primary" style="cursor:default;">
+		<div name="<?= $row['id'] ?>" class="comment panel panel-primary">
 			<div class="panel-heading"><b>By: <?= $row['author'] ?></b></div>
 			<div class="panel-body"><?= $row['description'] ?></div>
 		</div>
@@ -84,6 +86,11 @@
 
 <!-- This script cannot be in a separate JavaScript file as it requires some PHP -->
 <script>
+	/* Delete the post when this button is clicked. */
+	/* This can't go in a separate file because it requires PHP. */
+	$("#delete-post-button").click(function() {
+		window.location.href = "<?= BASE_URL ?>/post/delete/<?= $post['id'] ?>";
+	});
 	/* This is a 'listener' function to be triggered when a panel is clicked. */
 	$("#back-button").click(function() {
 		var id = $(this).attr('name');

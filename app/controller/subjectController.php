@@ -30,6 +30,10 @@ class SchoolController {
 				$postID = $_GET['pid'];
 				$this->editPost($postID);
 				break;
+			case 'deletePost':
+				$postID = $_GET['pid'];
+				$this->deletePost($postID);
+				break;
 			case 'comment':
 				$this->addComment();
 				break;
@@ -148,6 +152,21 @@ class SchoolController {
 		// Redirect home.
 		session_start();
 		header('Location: '.BASE_URL.'/post/'.$id);
+	}
+
+	// Simply remove the specific post from the database based on ID.
+	public function deletePost($id) {
+		// Connect to the database.
+		$connection = mysql_connect(DB_HOST, DB_USER, DB_PASS) or die ('Error: Could not connect to MySql database');
+		mysql_select_db(DB_DATABASE);
+
+		// Query to the database information to delete.
+		$query = sprintf("DELETE FROM post WHERE id = %d", $id);
+		mysql_query($query);
+
+		// Redirect home.
+		session_start();
+		header('Location: '.BASE_URL.'/');
 	}
 
 	// This function will add the comment to the specific post's ID.
