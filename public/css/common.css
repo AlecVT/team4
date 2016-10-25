@@ -5,7 +5,7 @@ html { position: relative; min-height: 100%; }
 	The margin at the bottom is for the sticky footer.
 	I also like this font better than the default font.
 */
-body{
+body {
 	margin-bottom: 180px;
 	font-family: Futura, 'Trebuchet MS', Arial, sans-serif;
 }
@@ -56,6 +56,15 @@ h2 { font-size: 1.5em; }
 }
 .footer p {
 	margin-top: 8px;
+}
+
+/* This panel class will contain most of our user data. */
+.panel {
+	display: inline-block;
+	height: 256px;
+	width: 256px;
+	margin: 16px;
+	cursor: pointer;
 }
 
 /* For the smallest window size. */

@@ -6,12 +6,12 @@
 		<meta name="description" content="This service is for students of all levels to collaborate on school topics and specific problems.">
 		<title>Temporary Name</title>
 
-		<link rel="stylesheet" type="text/css" href="<?= BASE_URL ?>public/css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="<?= BASE_URL ?>public/css/common.css">
+		<link rel="stylesheet" type="text/css" href="<?= BASE_URL ?>/public/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="<?= BASE_URL ?>/public/css/common.css">
 
-		<script src="<?= BASE_URL ?>public/js/fontawesome.js"></script>
-		<script type="text/javascript" src="<?= BASE_URL ?>public/js/jquery-3.1.1.min.js"></script>
-		<script type="text/javascript" src="<?= BASE_URL ?>public/js/bootstrap.min.js"></script>
+		<script src="<?= BASE_URL ?>/public/js/fontawesome.js"></script>
+		<script type="text/javascript" src="<?= BASE_URL ?>/public/js/jquery-3.1.1.min.js"></script>
+		<script type="text/javascript" src="<?= BASE_URL ?>/public/js/bootstrap.min.js"></script>
 
 	</head>
 
@@ -37,11 +37,11 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="<?= BASE_URL ?>">Temporary Name</a>
+					<a class="navbar-brand" href="<?= BASE_URL ?>/">Temporary Name</a>
 				</div>
 				<div id="mainNavbar" class="collapse navbar-collapse">
 					<ul class="nav navbar-nav">
-						<li <?= isSelected($pageName, 'Home') ?> ><a href="<?= BASE_URL ?>">Home</a></li>
+						<li <?= isSelected($pageName, 'Home') ?> ><a href="<?= BASE_URL ?>/">Home</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<!-- We want to filter what elements we have in our navigation bar based on if we are signed in or not. -->
@@ -63,7 +63,7 @@
 			/* This is a 'listener' function to be triggered when the logout button is clicked in the navigation bar. */
 			$('#logout-button').click(function() {
 				/* We want to POST to the logout URL. This will end our session. */
-				$.post('<?= BASE_URL ?>logout');
+				$.post('<?= BASE_URL ?>/logout');
 			});
 		</script>
 
@@ -78,7 +78,7 @@
 					</div>
 					<div class="modal-body">
 						<!-- This is a standard login form for Bootstrap. -->
-						<form class="form-login" action="<?= BASE_URL ?>login" method="POST">
+						<form class="form-login" action="<?= BASE_URL ?>/login" method="POST">
 							<label for="inputEmail" class="sr-only">Email Address</label>
 							<input id="inputEmail" name="email" type="email" class="form-control" placeholder="Email Address" required autofocus>
 							<label for="inputPassword" class="sr-only">Password</label>

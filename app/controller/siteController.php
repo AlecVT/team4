@@ -36,6 +36,13 @@ class SiteController {
 
 	public function home() {
 		$pageName = 'Home';
+
+		// Get all of the schools from the database.
+		$connection = mysql_connect(DB_HOST, DB_USER, DB_PASS) or die ('Error: Could not connect to MySql database');
+		mysql_select_db(DB_DATABASE);
+		$query = "SELECT * FROM subject; ";
+		$result = mysql_query($query);
+
 		include_once SYSTEM_PATH.'/view/header.tpl';
 		include_once SYSTEM_PATH.'/view/home.tpl';
 		include_once SYSTEM_PATH.'/view/footer.tpl';
