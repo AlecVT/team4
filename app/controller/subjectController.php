@@ -23,6 +23,9 @@ class SchoolController {
 				$postID = $_GET['pid'];
 				$this->viewPost($postID);
 				break;
+			case 'comment':
+				$this->addComment();
+				break;
 
 			// Redirect to home page if all else fails.
 			default:
@@ -86,12 +89,34 @@ class SchoolController {
 		$query = sprintf("SELECT * FROM post WHERE id = %d;", $id);
 		$resultTwo = mysql_query($query);
 		while($row = mysql_fetch_assoc($resultTwo)) {
+			$post['id'] = $row['id'];
 			$post['title'] = $row['title'];
+			$post['subject'] = $row['subject'];
 		}
 
 		include_once SYSTEM_PATH.'/view/header.tpl';
 		include_once SYSTEM_PATH.'/view/post.tpl';
 		include_once SYSTEM_PATH.'/view/footer.tpl';
+	}
+
+	// This function will add the comment to the specific post's ID.
+	public function addComment() {
+		// Get the information for the comment.
+		$post = $_POST['post'];
+		$description = $_POST['description'];
+		$author = $_POST['author'];
+
+		// Connect to the database.
+		$connection = mysql_connect(DB_HOST, DB_USER, DB_PASS) or die ('Error: Could not connect to MySql database');
+		mysql_select_db(DB_DATABASE);
+
+		// Query to the database the new information.
+		$query = sprintf("INSERT INTO `comment` (`post`, `description`, `author`) VALUES ('%d', '%s', '%s')", $post, $description, $author);
+		mysql_query($query);
+
+		// Redirect home.
+		session_start();
+		header('Location: '.BASE_URL);
 	}
 
 }

@@ -1,3 +1,5 @@
+<button id="back-button" class="btn btn-default" style="float:left;">Back</button>
+
 <h1><?= $subject['name'] ?></h1>
 <h2>Temporary text to tell the user what to do.</h2>
 
@@ -21,7 +23,12 @@
 	/* This is a 'listener' function to be triggered when a panel is clicked. */
 	$(".panel").click(function() {
 		var id = $(this).attr('name');
-		/* We want to go to the specific subject's page based on ID. */
+		/* We want to go to the specific post's page based on ID. */
 		window.location.href = "<?= BASE_URL ?>/post/"+id;
+	});
+	/* This is a 'listener' function to be triggered when a panel is clicked. */
+	$("#back-button").click(function() {
+		// Just go back to the home page.
+		window.location.href = "<?= BASE_URL ?>/";
 	});
 </script>
