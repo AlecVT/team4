@@ -4,9 +4,17 @@
 
 <div class="panel-group">
 	<?php while($row = mysql_fetch_assoc($result)): ?>
+		<?php
+			$queryTwo = sprintf("SELECT * FROM post WHERE subject = %d;", $row['id']);
+			$resultTwo = mysql_query($queryTwo);
+			$mostRecent = mysql_fetch_assoc($resultTwo);
+		?>
 		<div name="<?= $row['id'] ?>" class="panel panel-primary">
 			<div class="panel-heading"><b><?= $row['name'] ?></b></div>
-			<div class="panel-body">Temp info</div>
+			<div class="panel-body">
+				<u><b>Most Recent Topic</b></u><br>
+				<?= $mostRecent['title'] ?>
+			</div>
 		</div>
 	<?php endwhile; ?>
 </div>

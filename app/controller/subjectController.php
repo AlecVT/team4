@@ -23,6 +23,13 @@ class SchoolController {
 				$postID = $_GET['pid'];
 				$this->viewPost($postID);
 				break;
+			case 'addPost':
+				$this->addPost();
+				break;
+			case 'editPost':
+				$postID = $_GET['pid'];
+				$this->editPost($postID);
+				break;
 			case 'comment':
 				$this->addComment();
 				break;
@@ -58,6 +65,7 @@ class SchoolController {
 		$query = sprintf("SELECT * FROM subject WHERE id = %d;", $id);
 		$resultTwo = mysql_query($query);
 		while($row = mysql_fetch_assoc($resultTwo)) {
+			$subject['id'] = $row['id'];
 			$subject['name'] = $row['name'];
 		}
 
@@ -91,12 +99,55 @@ class SchoolController {
 		while($row = mysql_fetch_assoc($resultTwo)) {
 			$post['id'] = $row['id'];
 			$post['title'] = $row['title'];
+			$post['description'] = $row['description'];
+			$post['author'] = $row['author'];
 			$post['subject'] = $row['subject'];
 		}
 
 		include_once SYSTEM_PATH.'/view/header.tpl';
 		include_once SYSTEM_PATH.'/view/post.tpl';
 		include_once SYSTEM_PATH.'/view/footer.tpl';
+	}
+
+	// Add a post to the database.
+	public function addPost() {
+		// Get the information for the comment.
+		$subject = $_POST['subject'];
+		$title = $_POST['title'];
+		$description = $_POST['description'];
+		$author = $_POST['author'];
+
+		// Connect to the database.
+		$connection = mysql_connect(DB_HOST, DB_USER, DB_PASS) or die ('Error: Could not connect to MySql database');
+		mysql_select_db(DB_DATABASE);
+
+		// Query to the database the new information.
+		$query = sprintf("INSERT INTO `post` (`subject`, `title`, `description`, `author`) VALUES ('%d', '%s', '%s', '%s')", $subject, $title, $description, $author);
+		mysql_query($query) or trigger_error(mysql_error());
+
+		// Redirect to that subject.
+		session_start();
+		header('Location: '.BASE_URL.'/subject/'.$subject);
+	}
+
+	// This function is used for editting a specific post.
+	public function editPost($id) {
+		// Get the new information for the post.
+		$title = $_POST['title'];
+		$description = $_POST['description'];
+		$author = $_POST['author'];
+
+		// Connect to the database.
+		$connection = mysql_connect(DB_HOST, DB_USER, DB_PASS) or die ('Error: Could not connect to MySql database');
+		mysql_select_db(DB_DATABASE);
+
+		// Query to the database the new information.
+		$query = sprintf("UPDATE post SET title = '%s', description = '%s', author = '%s'	WHERE id = %d", $title, $description, $author, $id);
+		mysql_query($query);
+
+		// Redirect home.
+		session_start();
+		header('Location: '.BASE_URL.'/post/'.$id);
 	}
 
 	// This function will add the comment to the specific post's ID.
@@ -114,7 +165,7 @@ class SchoolController {
 		$query = sprintf("INSERT INTO `comment` (`post`, `description`, `author`) VALUES ('%d', '%s', '%s')", $post, $description, $author);
 		mysql_query($query);
 
-		// Redirect home.
+		// Redirect to that topic.
 		session_start();
 		header('Location: '.BASE_URL.'/post/'.$post);
 	}

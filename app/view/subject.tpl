@@ -22,6 +22,42 @@
 	<?php endwhile; ?>
 </div>
 
+<!-- Only allow someone to add a post if they're signed in. -->
+<?php
+	if(isset($_SESSION['user'])) {
+		echo '<button class="btn btn-default" data-toggle="modal" data-target="#add-topic-modal">Add Topic</button>';
+	}
+?>
+
+<!-- This modal is for the user to add a post. -->
+<!-- I'm using the Bootstrap standard format. -->
+<div id="add-topic-modal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Add Topic</h4>
+			</div>
+			<div class="modal-body">
+				<!-- This is a standard login form for Bootstrap. Using it here for styling purposes. -->
+				<form class="form-login" action="<?= BASE_URL ?>/post/add/" method="POST">
+					<input name="subject" type="text" value="<?= $subject['id'] ?>" style="visibility:hidden;">
+					<label for="inputTitle" class="sr-only">Topic Title</label>
+					<input id="inputTitle" name="title" type="text" class="form-control" placeholder="Topic Title" required autofocus>
+					<label for="inputDescription" class="sr-only">Topic Description</label>
+					<textarea id="inputDescription" name="description" type="text" class="form-control" placeholder="Topic Description" style="resize:none;" required autofocus></textarea>
+					<label for="inputAuthor" class="sr-only">Author</label>
+					<input id="inputAuthor" name="author" type="text" class="form-control" placeholder="Author" required>
+					<button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+
 <!-- This script cannot be in a separate JavaScript file as it requires some PHP -->
 <script>
 	/* This is a 'listener' function to be triggered when a panel is clicked. */

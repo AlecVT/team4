@@ -14,4 +14,6 @@ RewriteRule ^logout/?$ app/controller/siteController.php?action=logout [QSA,L]
 
 RewriteRule ^subject/(\d+)/?$ app/controller/subjectController.php?action=subject&pid=$1 [QSA,L]
 RewriteRule ^post/(\d+)/?$ app/controller/subjectController.php?action=post&pid=$1 [QSA,L]
+RewriteRule ^post/add/?$ app/controller/subjectController.php?action=addPost [QSA,L]
+RewriteRule ^post/edit/(\d+)/?$ app/controller/subjectController.php?action=editPost&pid=$1 [QSA,L]
 RewriteRule ^comment/?$ app/controller/subjectController.php?action=comment [QSA,L]
