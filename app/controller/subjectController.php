@@ -116,7 +116,7 @@ class SchoolController {
 
 		// Redirect home.
 		session_start();
-		header('Location: '.BASE_URL);
+		header('Location: '.BASE_URL.'/post/'.$post);
 	}
 
 }

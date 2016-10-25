@@ -53,17 +53,17 @@ class SiteController {
 		$adminPassword = 'admin';
 		if (($email == $adminEmail) && ($password == $adminPassword)) {
 			$_SESSION['user'] = $email;
-			header('Location: '.BASE_URL);
+			header('Location: '.BASE_URL.'/');
 			exit();
 		} else {
-			header('Location: '.BASE_URL);
+			header('Location: '.BASE_URL.'/');
 			exit();
 		}
 	}
 
 	public function logout() {
 		session_destroy();
-		header('Location: '.BASE_URL);
+		header('Location: '.BASE_URL.'/');
 		exit();
 	}
 

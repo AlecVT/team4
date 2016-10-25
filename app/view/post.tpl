@@ -11,7 +11,7 @@
 <!-- For each comment under the specific post ID, output it. -->
 <div class="panel-group">
 	<?php while($row = mysql_fetch_assoc($result)): ?>
-		<div name="<?= $row['id'] ?>" class="panel panel-primary">
+		<div name="<?= $row['id'] ?>" class="panel panel-primary" style="cursor:default;">
 			<div class="panel-heading"><b>By: <?= $row['author'] ?></b></div>
 			<div class="panel-body"><?= $row['description'] ?></div>
 		</div>
