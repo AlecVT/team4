@@ -19,6 +19,10 @@ class SchoolController {
 				$subjectID = $_GET['pid'];
 				$this->viewSubject($subjectID);
 				break;
+			case 'post':
+				$postID = $_GET['pid'];
+				$this->viewPost($postID);
+				break;
 
 			// Redirect to home page if all else fails.
 			default:
@@ -40,13 +44,53 @@ class SchoolController {
 		// This query will get all of the items under a certain school
 		$query = sprintf("SELECT * FROM post WHERE subject = %d;", $id);
 		$result = mysql_query($query);
+		// Do it again to get the size.
+		$resultSize = mysql_query($query);
 
 		// If there are no posts for a subject, we need to display a message to the user.
 		$empty = false;
-		if (sizeof(mysql_fetch_assoc($result)) == 1) $empty = true;
+		if (sizeof(mysql_fetch_assoc($resultSize)) == 1) $empty = true;
+
+		// Get the subject's information.
+		$query = sprintf("SELECT * FROM subject WHERE id = %d;", $id);
+		$resultTwo = mysql_query($query);
+		while($row = mysql_fetch_assoc($resultTwo)) {
+			$subject['name'] = $row['name'];
+		}
 
 		include_once SYSTEM_PATH.'/view/header.tpl';
 		include_once SYSTEM_PATH.'/view/subject.tpl';
+		include_once SYSTEM_PATH.'/view/footer.tpl';
+	}
+
+	// View the specific post by a post ID.
+	public function viewPost($id) {
+		session_start();
+		$pageName = 'Post';
+
+		// Connect to the database.
+		$connection = mysql_connect(DB_HOST, DB_USER, DB_PASS) or die ('Error: Could not connect to MySql database');
+		mysql_select_db(DB_DATABASE);
+
+		// This query will get all of the items under a certain school
+		$query = sprintf("SELECT * FROM comment WHERE post = %d;", $id);
+		$result = mysql_query($query);
+		// Do it again to get the size.
+		$resultSize = mysql_query($query);
+
+		// If there are no posts for a subject, we need to display a message to the user.
+		$empty = false;
+		if (sizeof(mysql_fetch_assoc($resultSize)) == 1) $empty = true;
+
+		// Get the posts's information.
+		$query = sprintf("SELECT * FROM post WHERE id = %d;", $id);
+		$resultTwo = mysql_query($query);
+		while($row = mysql_fetch_assoc($resultTwo)) {
+			$post['title'] = $row['title'];
+		}
+
+		include_once SYSTEM_PATH.'/view/header.tpl';
+		include_once SYSTEM_PATH.'/view/post.tpl';
 		include_once SYSTEM_PATH.'/view/footer.tpl';
 	}
 
