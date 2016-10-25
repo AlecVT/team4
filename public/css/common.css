@@ -58,12 +58,16 @@ h2 { font-size: 1.5em; }
 	margin-top: 8px;
 }
 
+#back-button { float: left; }
+
 /* This panel class will contain most of our user data. */
+.panel-group { padding-bottom: 32px; }
 .panel {
 	display: inline-block;
 	height: 256px;
 	width: 256px;
 	margin: 16px;
+	vertical-align: bottom;
 	cursor: pointer;
 }
 

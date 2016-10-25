@@ -1,11 +1,11 @@
-<button id="back-button" name="<?= $post['subject'] ?>" class="btn btn-default" style="float:left;">Back</button>
+<button id="back-button" name="<?= $post['subject'] ?>" class="btn btn-default">Back</button><br>
 
 <h1><?= $post['title'] ?></h1>
-<h2>Temporary text to tell the user what to do.</h2>
+<h2>Here, if you want to, you can contribute by commenting your own response below.</h2>
 
 <!-- If there are no posts under this subject, display a message. -->
 <?php
-	if ($empty) echo '<p>There are no comments for this post.</p>';
+	if ($empty) echo '<b><p style="margin-top:32px;">There are no comments for this post.</p></b>';
 ?>
 
 <!-- For each comment under the specific post ID, output it. -->

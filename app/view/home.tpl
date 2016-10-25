@@ -1,6 +1,6 @@
 <h1><b>Welcome!</b></h1>
 
-<h2>This is temporary text explaining to the user how to use the site.</h2>
+<h2>This website should be used to post questions or topics of discussion in a specific subject matter. You may also contribute to existing questions or discussions.</h2>
 
 <div class="panel-group">
 	<?php while($row = mysql_fetch_assoc($result)): ?>
