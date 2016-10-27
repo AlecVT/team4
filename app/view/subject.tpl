@@ -46,6 +46,7 @@
 					<input id="inputTitle" name="title" type="text" class="form-control" placeholder="Topic Title" required autofocus>
 					<label for="inputDescription" class="sr-only">Topic Description</label>
 					<textarea id="inputDescription" name="description" type="text" class="form-control" placeholder="Topic Description" style="resize:none;" required autofocus></textarea>
+					<!-- Include the session author. -->
 					<input id="inputAuthor" name="author" type="text" class="form-control" placeholder="Author" value="<?= $_SESSION['author'] ?>" style="visibility:hidden;">
 					<button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
 				</form>
