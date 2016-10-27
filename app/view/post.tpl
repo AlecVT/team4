@@ -1,7 +1,7 @@
 <button id="back-button" name="<?= $post['subject'] ?>" class="btn btn-default">Back</button>
 <!-- Only a signed in user can edit a post. We're not worrying about who is signed in cause the only account is admin. -->
 <?php
-	if(isset($_SESSION['user'])) {
+	if($_SESSION['author'] == $post['author']) {
 		echo '<button class="btn btn-warning" data-toggle="modal" data-target="#edit-topic-modal" style="float:left;margin-left:16px;">Edit Topic</button>';
 		echo '<button id="delete-post-button" class="btn btn-danger" type="submit" style="float:left;margin-left:16px;">Delete</button>';
 	}
@@ -44,8 +44,8 @@
 					<input name="post" type="text" value="<?= $post['id'] ?>" style="visibility:hidden;">
 					<label for="inputDescription" class="sr-only">Comment Text</label>
 					<textarea id="inputDescription" name="description" type="text" class="form-control" placeholder="Comment Text" style="resize:none;" required autofocus></textarea>
-					<label for="inputAuthor" class="sr-only">Author</label>
-					<input id="inputAuthor" name="author" type="text" class="form-control" placeholder="Author" required>
+					<!-- Include the session author. -->
+					<input id="inputAuthor" name="author" type="text" class="form-control" placeholder="Author" value="<?= $_SESSION['author'] ?>" style="visibility:hidden;">
 					<button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
 				</form>
 			</div>
@@ -72,8 +72,6 @@
 					<input id="inputTitle" name="title" type="text" class="form-control" placeholder="Topic Title" value="<?= $post['title'] ?>" required autofocus>
 					<label for="inputDescription" class="sr-only">Topic Description</label>
 					<textarea id="inputDescription" name="description" type="text" class="form-control" placeholder="Topic Description" style="resize:none;" required autofocus><?= $post['description'] ?></textarea>
-					<label for="inputAuthor" class="sr-only">Author</label>
-					<input id="inputAuthor" name="author" type="text" class="form-control" placeholder="Author" value="<?= $post['author'] ?>" required>
 					<button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
 				</form>
 			</div>

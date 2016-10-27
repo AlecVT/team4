@@ -83,13 +83,20 @@ ALTER TABLE `comment` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMEN
 
 CREATE TABLE `user` (
 	`id` int(11) NOT NULL,
+	`name` varchar(100) NOT NULL,
 	`email` varchar(100) NOT NULL,
-	`password` varchar(100) NOT NULL,
+	`password` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Add the one admin login information to the user table.
-INSERT INTO 'user' ('id', 'email', 'password') VALUES (1, 'admin@admin.com', 'admin');
+INSERT INTO `user` (`id`, `name`, `email`, `password`) VALUES
+	(1, 'Admin', 'admin@admin.com', 'admin'),
+	(2, 'Alec Masterson', 'alec@masterson.com', '1234'),
+	(3, 'James Wilson', 'joey@wilson.com', '1234'),
+	(4, 'Joey Watts', 'joey@watts.com', '1234'),
+	(5, 'Haiyu Zhao', 'haiyu@zhao.com', '1234'),
+	(6, 'Matthew Stevens', 'matthew@stevens.com', '1234');
 
 -- Set the primart_key and auto-increment properties to the user table.
 ALTER TABLE `user` ADD PRIMARY KEY (`id`);
-ALTER TABLE `user` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `user` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;

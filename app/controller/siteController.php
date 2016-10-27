@@ -60,10 +60,19 @@ class SiteController {
 	}
 
 	public function login($email, $password) {
-		$adminEmail = 'admin@admin.com';
-		$adminPassword = 'admin';
-		if (($email == $adminEmail) && ($password == $adminPassword)) {
-			$_SESSION['user'] = $email;
+		// Get the user from the database, if it exists.
+		$connection = mysql_connect(DB_HOST, DB_USER, DB_PASS) or die ('Error: Could not connect to MySql database');
+		mysql_select_db(DB_DATABASE);
+
+		// Get the user info, if it exists.
+		$query = sprintf("SELECT * FROM user WHERE email = '%s'", $email);
+		$result = mysql_query($query);
+		$user = mysql_fetch_assoc($result);
+
+		// Make sure the passwords match.
+		if ($user['password'] == $password) {
+			$_SESSION['user'] = $user['email'];
+			$_SESSION['author'] = $user['name'];
 			header('Location: '.BASE_URL.'/');
 			exit();
 		} else {

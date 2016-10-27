@@ -156,6 +156,7 @@ class SchoolController {
 
 	// Simply remove the specific post from the database based on ID.
 	public function deletePost($id) {
+
 		// Connect to the database.
 		$connection = mysql_connect(DB_HOST, DB_USER, DB_PASS) or die ('Error: Could not connect to MySql database');
 		mysql_select_db(DB_DATABASE);
@@ -175,6 +176,8 @@ class SchoolController {
 		$post = $_POST['post'];
 		$description = $_POST['description'];
 		$author = $_POST['author'];
+		// Test if the user isn't logged in.
+		if ($author == '') $author = 'Unknown';
 
 		// Connect to the database.
 		$connection = mysql_connect(DB_HOST, DB_USER, DB_PASS) or die ('Error: Could not connect to MySql database');
