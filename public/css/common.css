@@ -1,44 +1,11 @@
-/* This is for the sticky footer. */
-html { position: relative; min-height: 100%; }
-
-/*
-	The margin at the bottom is for the sticky footer.
-	I also like this font better than the default font.
-*/
-body {
-	margin-bottom: 180px;
-	font-family: Futura, 'Trebuchet MS', Arial, sans-serif;
-}
-
-/* I don't like the default blue outline on buttons or links when clicked. */
-input[type=button]:focus, button[type=button]:focus, a:focus { outline: none; }
-
-/*
-	This section includes the modal for login styles.
-	Most of this is obtained by the standards provided by Bootstrap, with some changes.
-*/
-.modal-header h4 { text-align: center; }
-.form-login {
-	max-width: 330px;
-	margin: 0px auto;
-	padding: 15px;
-}
-.form-login .form-control {
-	position: relative;
-	height: auto;
-	padding: 10px;
-	font-size: 16px;
-}
-
-/* I don't like the default sizes for these semantic tags. */
-h1 { font-size: 3em; }
-h2 { font-size: 1.5em; }
+/* I like this font better than the default font. */
+body { font-family: Futura, 'Trebuchet MS', Arial, sans-serif; }
 
 /* 
 	The page's content needs to be pushed away from the navigation bar.
 	I also like centered text as a main theme.
 */
-.content-wrapper { margin: 32px 0px; text-align: center; }
+.mdl-layout__content { margin: 32px 0px; text-align: center; }
 
 /* This section is for the custom footer CSS. */
 .footer {
@@ -80,17 +47,17 @@ h2 { font-size: 1.5em; }
 /* For the smallest window size. */
 @media (max-width: 767px) {
 	/* On smaller windows, we want to take advantage of the entire width. */
-	nav, .content-wrapper { width: 100%; }
+	.mdl-layout__content { width: 100%; }
 }
 
 /* For medium sized windows. */
 @media (min-width: 768px) and (max-width: 1199px) {
 	/* I like padding on the sides of my pages. */
-	nav, .content-wrapper { width: 76%; margin-left: 12% }
+	.mdl-layout__content { width: 76%; margin-left: 12% }
 }
 
 /* For the largest sized windows. */
 @media (min-width: 1200px) {
 	/* I like padding on the sides of my pages. */
-	nav, .content-wrapper { width: 70%; margin-left: 15%; }
+	.mdl-layout__content { width: 70%; margin-left: 15%; }
 }

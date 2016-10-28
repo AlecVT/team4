@@ -4,14 +4,16 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="description" content="This service is for students of all levels to collaborate on school topics and specific problems.">
-		<title>Temporary Name</title>
+		<title>Edu-Share</title>
 
-		<link rel="stylesheet" type="text/css" href="<?= BASE_URL ?>/public/css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="<?= BASE_URL ?>/public/css/common.css">
+		<link rel="stylesheet" type="text/css" href="<?= BASE_URL ?>/public/css/material.min.css">
+		<link rel="stylesheet" type="text/css" href="<?= BASE_URL ?>/public/css/material-color.css">
+		<link rel="stylesheet" type="text/css" href="<?= BASE_URL ?>/public/css/material-icons.css">
+		<!-- link rel="stylesheet" type="text/css" href="<?= BASE_URL ?>/public/css/common.css"-->
 
-		<script src="<?= BASE_URL ?>/public/js/fontawesome.js"></script>
+		<script type="text/javascript" src="<?= BASE_URL ?>/public/js/fontawesome.js"></script>
 		<script type="text/javascript" src="<?= BASE_URL ?>/public/js/jquery-3.1.1.min.js"></script>
-		<script type="text/javascript" src="<?= BASE_URL ?>/public/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="<?= BASE_URL ?>/public/js/material.min.js"></script>
 
 	</head>
 
@@ -19,19 +21,53 @@
 
 		<?php
 			// This code tests if a current page is active.
-			// It will automatically add the 'active' class to the correct navigation element.
+			// It will automatically add the 'is-active' class to the correct navigation element.
 			function isSelected($pageName, $link) {
-				if($pageName == $link) return ' class="active" ';
-			}
+				if($pageName == $link) return ' class="is-active" ';
+			};
 		?>
+		<!-- This is the layout definition for mdl. Everything will be in this. -->
+		<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
 
-		<!-- The navigation bar will be displayed at the top of each page. -->
-		<!-- It has a responsive layout, even on a small window. -->
-		<!-- I'm using the Bootstrap standard format with some custom CSS. -->
+			<!-- Here is the navigation section. This will be displayed on larger screens. -->
+			<header class="mdl-layout__header mdl-layout__header--scroll mdl-color--primary">
+				<div class="mdl-layout--large-screen-only mdl-layout__header-row"></div>
+				<div class="mdl-layout--large-screen-only mdl-layout__header-row"><h3>Edu-Share</h3></div>
+				<div class="mdl-layout--large-screen-only mdl-layout__header-row"></div>
+
+				<div class="mdl-layout--large-screen-only mdl-layout__tab-bar mdl-js-ripple-effect mdl-color--primary-dark">
+					<a class="mdl-layout__tab is-active <?= isSelected($pageName, 'Home') ?>" href="<?= BASE_URL ?>/">Home</a>
+					<a class="mdl-layout__tab <?= isSelected($pageName, 'About') ?>" href="<?= BASE_URL ?>/about">About</a>
+					<div class="mdl-layout-spacer"></div>
+					<a class="mdl-layout__tab" href="">SignUp</a>
+					<a class="mdl-layout__tab" href="">Login</a>
+				</div>
+			</header>
+			<!-- This is also for navigation, but only on smaller screens. -->
+			<!-- This is the classic hamburger menu. -->
+			<div class="mdl-layout__drawer mdl-layout--small-screen-only">
+				<span class="mdl-layout__title">Temporary Name</span>
+				<nav class="mdl-navigation">
+					<a class="mdl-navigation__link <?= isSelected($pageName, 'Home') ?>" href="<?= BASE_URL ?>/">Home</a>
+					<a class="mdl-navigation__link <?= isSelected($pageName, 'About') ?>" href="<?= BASE_URL ?>/about">About</a>
+					<a class="mdl-navigation__link" href="">SignUp</a>
+					<a class="mdl-navigation__link" href="">Login</a>
+				</nav>
+			</div>
+
+			<main class="mdl-layout__content" style="width:80%;margin-left:10%;">
+				<div class="mdl-grid">
+<!--
+
+		
+
+		<!- The navigation bar will be displayed at the top of each page. ->
+		<!- It has a responsive layout, even on a small window. ->
+		<!- I'm using the Bootstrap standard format with some custom CSS. ->
 		<nav class="navbar navbar-inverse">
 			<div class="container-fluid">
 				<div class="navbar-header">
-					<!-- This hamburger button oonly appears when the window gets to small for the navigation menu. -->
+					<!- This hamburger button oonly appears when the window gets to small for the navigation menu. ->
 					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mainNavbar">
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
@@ -45,7 +81,7 @@
 						<li <?= isSelected($pageName, 'About') ?> ><a href="<?= BASE_URL ?>/about">About</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
-						<!-- We want to filter what elements we have in our navigation bar based on if we are signed in or not. -->
+						<!- We want to filter what elements we have in our navigation bar based on if we are signed in or not. ->
 						<?php
 							if(isset($_SESSION['user'])) {
 								echo '<li id="logout-button"><a href=""><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>';
@@ -59,7 +95,7 @@
 			</div>
 		</nav>
 
-		<!-- This script cannot be in a separate JavaScript file as it requires some PHP -->
+		<!- This script cannot be in a separate JavaScript file as it requires some PHP ->
 		<script>
 			/* This is a 'listener' function to be triggered when the logout button is clicked in the navigation bar. */
 			$('#logout-button').click(function() {
@@ -68,8 +104,8 @@
 			});
 		</script>
 
-		<!-- This modal is for the user to login. -->
-		<!-- I'm using the Bootstrap standard format. -->
+		<!- This modal is for the user to login. ->
+		<!- I'm using the Bootstrap standard format. ->
 		<div id="login-modal" class="modal fade" role="dialog">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -78,7 +114,7 @@
 						<h4 class="modal-title">Login</h4>
 					</div>
 					<div class="modal-body">
-						<!-- This is a standard login form for Bootstrap. -->
+						<!- This is a standard login form for Bootstrap. ->
 						<form class="form-login" action="<?= BASE_URL ?>/login" method="POST">
 							<label for="inputEmail" class="sr-only">Email Address</label>
 							<input id="inputEmail" name="email" type="email" class="form-control" placeholder="Email Address" required autofocus>
@@ -99,5 +135,7 @@
 			</div>
 		</div>
 
-		<!-- I like having padding on the sides of my pages. -->
+		<!- I like having padding on the sides of my pages. ->
 		<div class="content-wrapper">
+
+-->
