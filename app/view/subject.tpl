@@ -1,25 +1,28 @@
+<!-- Our script for AJAX checking. -->
+<script src="<?= BASE_URL ?>/public/js/posting.js"></script>
+
 <button id="back-button" class="btn btn-default">Back</button><br>
 
-<h1><?= $subject['name'] ?></h1>
+<h1><?= $subject->get('name') ?></h1>
 <h2>Below are the existing questions and discussions for this subject. You may add your own by signing in.</h2>
 
 <!-- If there are no posts under this subject, display a message. -->
 <?php
-	if ($empty) echo '<b><p style="margin-top:32px;">There are no posts for this subject.</p></b>';
+	if (sizeof($posts) == 0) echo '<b><p style="margin-top:32px;">There are no posts for this subject.</p></b>';
 ?>
 
 <!-- For each post under the specific subject ID, output it. -->
 <div class="panel-group">
-	<?php while($row = mysql_fetch_assoc($result)): ?>
-		<div name="<?= $row['id'] ?>" class="panel panel-primary">
-			<div class="panel-heading"><b><?= $row['title'] ?></b></div>
+	<?php foreach($posts as $post => $post_value) { ?>
+		<div name="<?= $post_value->get('id') ?>" class="panel panel-primary">
+			<div class="panel-heading"><b><?= $post_value->get('title') ?></b></div>
 			<div class="panel-body">
-				<h4><u><b>Author:</b></u> <?= $row['author'] ?></h4><br>
+				<h4><u><b>Author:</b></u> <?= $post_value->get('author') ?></h4><br>
 				<u><b>Topic</b></u><br>
-				<?= $row['description'] ?>
+				<?= $post_value->get('description') ?>
 			</div>
 		</div>
-	<?php endwhile; ?>
+	<?php } ?>
 </div>
 
 <!-- Only allow someone to add a post if they're signed in. -->
@@ -41,14 +44,14 @@
 			<div class="modal-body">
 				<!-- This is a standard login form for Bootstrap. Using it here for styling purposes. -->
 				<form class="form-login" action="<?= BASE_URL ?>/post/add/" method="POST">
-					<input name="subject" type="text" value="<?= $subject['id'] ?>" style="visibility:hidden;">
+					<input name="subject" type="text" value="<?= $subject->get('id') ?>" style="visibility:hidden;">
 					<label for="inputTitle" class="sr-only">Topic Title</label>
 					<input id="inputTitle" name="title" type="text" class="form-control" placeholder="Topic Title" required autofocus>
 					<label for="inputDescription" class="sr-only">Topic Description</label>
 					<textarea id="inputDescription" name="description" type="text" class="form-control" placeholder="Topic Description" style="resize:none;" required autofocus></textarea>
 					<!-- Include the session author. -->
 					<input id="inputAuthor" name="author" type="text" class="form-control" placeholder="Author" value="<?= $_SESSION['author'] ?>" style="visibility:hidden;">
-					<button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+					<button id="add-submit-button" class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
 				</form>
 			</div>
 			<div class="modal-footer">

@@ -11,7 +11,7 @@
 				<i class="fa fa-facebook-square media-link" aria-hidden="true"></i>
 				<i class="fa fa-twitter-square media-link" aria-hidden="true"></i>
 
-				<p id="copyright">Copyright 2016 Temp</p>
+				<p id="copyright">Copyright 2016 Edu-Share</p>
 			</div>
 		</footer>
 

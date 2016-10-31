@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="description" content="This service is for students of all levels to collaborate on school topics and specific problems.">
-		<title>Temporary Name</title>
+		<title>Edu-Share</title>
 
 		<link rel="stylesheet" type="text/css" href="<?= BASE_URL ?>/public/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="<?= BASE_URL ?>/public/css/common.css">
@@ -17,12 +17,17 @@
 
 	<body>
 
+		<!-- You never know when we need this variable. -->
+		<script type="text/javascript">var baseURL = '<?= BASE_URL ?>';</script>
+
 		<?php
 			// This code tests if a current page is active.
 			// It will automatically add the 'active' class to the correct navigation element.
 			function isSelected($pageName, $link) {
 				if($pageName == $link) return ' class="active" ';
 			}
+			// Start the session for being logged in or not.
+			session_start();
 		?>
 
 		<!-- The navigation bar will be displayed at the top of each page. -->
@@ -37,7 +42,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="<?= BASE_URL ?>/">Temporary Name</a>
+					<a class="navbar-brand" href="<?= BASE_URL ?>/">Edu-Share</a>
 				</div>
 				<div id="mainNavbar" class="collapse navbar-collapse">
 					<ul class="nav navbar-nav">
@@ -48,7 +53,7 @@
 						<!-- We want to filter what elements we have in our navigation bar based on if we are signed in or not. -->
 						<?php
 							if(isset($_SESSION['user'])) {
-								echo '<li id="logout-button"><a href=""><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>';
+								echo '<li id="logout-button"><a href=""><span class="glyphicon glyphicon-log-out"></span> '.$_SESSION['user'].'Logout</a></li>';
 							} else {
 								echo '<li><a href=""><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>';
 								echo '<li><a href="" data-toggle="modal" data-target="#login-modal"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>';

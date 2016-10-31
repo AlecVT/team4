@@ -1,30 +1,31 @@
-<button id="back-button" name="<?= $post['subject'] ?>" class="btn btn-default">Back</button>
-<!-- Only a signed in user can edit a post. We're not worrying about who is signed in cause the only account is admin. -->
+<button id="back-button" name="<?= $post->get('subject') ?>" class="btn btn-default">Back</button>
+
+<!-- Only the author of a post can edit that post. -->
 <?php
-	if($_SESSION['author'] == $post['author']) {
+	if($_SESSION['author'] == $post->get('author')) {
 		echo '<button class="btn btn-warning" data-toggle="modal" data-target="#edit-topic-modal" style="float:left;margin-left:16px;">Edit Topic</button>';
 		echo '<button id="delete-post-button" class="btn btn-danger" type="submit" style="float:left;margin-left:16px;">Delete</button>';
 	}
 ?>
 <br>
 
-<h1><?= $post['title'] ?></h1>
-<h2><u><b>Topic:</b></u> <?= $post['description'] ?></h2>
+<h1><?= $post->get('title') ?></h1>
+<h2><u><b>Topic:</b></u> <?= $post->get('description') ?></h2>
 <h2>Here, if you want to, you can contribute by commenting your own response below.</h2>
 
 <!-- If there are no posts under this subject, display a message. -->
 <?php
-	if ($empty) echo '<b><p style="margin-top:32px;">There are no comments for this post.</p></b>';
+	if (sizeof($comments) == 0) echo '<b><p style="margin-top:32px;">There are no comments for this post.</p></b>';
 ?>
 
 <!-- For each comment under the specific post ID, output it. -->
 <div class="panel-group">
-	<?php while($row = mysql_fetch_assoc($result)): ?>
-		<div name="<?= $row['id'] ?>" class="comment panel panel-primary">
-			<div class="panel-heading"><b>By: <?= $row['author'] ?></b></div>
-			<div class="panel-body"><?= $row['description'] ?></div>
+	<?php foreach($comments as $comment => $comment_value) { ?>
+		<div name="<?= $comment_value->get('id') ?>" class="comment panel panel-primary">
+			<div class="panel-heading"><b>By: <?= $comment_value->get('author') ?></b></div>
+			<div class="panel-body"><?= $comment_value->get('description') ?></div>
 		</div>
-	<?php endwhile; ?>
+	<?php } ?>
 </div>
 
 <button class="btn btn-default" data-toggle="modal" data-target="#add-comment-modal">Add Comment</button>
@@ -41,7 +42,7 @@
 			<div class="modal-body">
 				<!-- This is a standard login form for Bootstrap. Using it here for styling purposes. -->
 				<form class="form-login" action="<?= BASE_URL ?>/comment" method="POST">
-					<input name="post" type="text" value="<?= $post['id'] ?>" style="visibility:hidden;">
+					<input name="post" type="text" value="<?= $post->get('id') ?>" style="visibility:hidden;">
 					<label for="inputDescription" class="sr-only">Comment Text</label>
 					<textarea id="inputDescription" name="description" type="text" class="form-control" placeholder="Comment Text" style="resize:none;" required autofocus></textarea>
 					<!-- Include the session author. -->
@@ -67,11 +68,11 @@
 			</div>
 			<div class="modal-body">
 				<!-- This is a standard login form for Bootstrap. Using it here for styling purposes. -->
-				<form class="form-login" action="<?= BASE_URL ?>/post/edit/<?= $post['id'] ?>" method="POST">
+				<form class="form-login" action="<?= BASE_URL ?>/post/edit/<?= $post->get('id') ?>" method="POST">
 					<label for="inputTitle" class="sr-only">Topic Title</label>
-					<input id="inputTitle" name="title" type="text" class="form-control" placeholder="Topic Title" value="<?= $post['title'] ?>" required autofocus>
+					<input id="inputTitle" name="title" type="text" class="form-control" placeholder="Topic Title" value="<?= $post->get('title') ?>" required autofocus>
 					<label for="inputDescription" class="sr-only">Topic Description</label>
-					<textarea id="inputDescription" name="description" type="text" class="form-control" placeholder="Topic Description" style="resize:none;" required autofocus><?= $post['description'] ?></textarea>
+					<textarea id="inputDescription" name="description" type="text" class="form-control" placeholder="Topic Description" style="resize:none;" required autofocus><?= $post->get('description') ?></textarea>
 					<button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
 				</form>
 			</div>
@@ -87,7 +88,7 @@
 	/* Delete the post when this button is clicked. */
 	/* This can't go in a separate file because it requires PHP. */
 	$("#delete-post-button").click(function() {
-		window.location.href = "<?= BASE_URL ?>/post/delete/<?= $post['id'] ?>";
+		window.location.href = "<?= BASE_URL ?>/post/delete/<?= $post->get('id') ?>";
 	});
 	/* This is a 'listener' function to be triggered when a panel is clicked. */
 	$("#back-button").click(function() {

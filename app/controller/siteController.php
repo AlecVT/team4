@@ -13,8 +13,8 @@ class SiteController {
 
 	// Route us to the appropriate class method for this action.
 	public function route($action) {
-		session_start();
 		switch($action) {
+
 			case 'home':
 				$this->home();
 				break;
@@ -22,16 +22,14 @@ class SiteController {
 				$this->about();
 				break;
 			case 'login':
-				$email = $_POST['email'];
-				$password = $_POST['password'];
-				$this->login($email, $password);
+				$this->login();
 				break;
 			case 'logout':
 				$this->logout();
 				break;
 
 			default:
-				header('Location: '.BASE_URL);
+				header('Location: '.BASE_URL.'/');
 				exit();
 		}
 
@@ -40,11 +38,8 @@ class SiteController {
 	public function home() {
 		$pageName = 'Home';
 
-		// Get all of the schools from the database.
-		$connection = mysql_connect(DB_HOST, DB_USER, DB_PASS) or die ('Error: Could not connect to MySql database');
-		mysql_select_db(DB_DATABASE);
-		$query = "SELECT * FROM subject; ";
-		$result = mysql_query($query);
+		// Get all of the subjects from the database.
+		$result = Subject::getAllSubjects();
 
 		include_once SYSTEM_PATH.'/view/header.tpl';
 		include_once SYSTEM_PATH.'/view/home.tpl';
@@ -59,20 +54,20 @@ class SiteController {
 		include_once SYSTEM_PATH.'/view/footer.tpl';
 	}
 
-	public function login($email, $password) {
-		// Get the user from the database, if it exists.
-		$connection = mysql_connect(DB_HOST, DB_USER, DB_PASS) or die ('Error: Could not connect to MySql database');
-		mysql_select_db(DB_DATABASE);
+	public function login() {
 
-		// Get the user info, if it exists.
-		$query = sprintf("SELECT * FROM user WHERE email = '%s'", $email);
-		$result = mysql_query($query);
-		$user = mysql_fetch_assoc($result);
+		// Get the login information from the POST call.
+		$email = $_POST['email'];
+		$password = $_POST['password'];
+		
+		// Try to find an existing email on the database of users.
+		$user = User::loadByEmail($email);
 
-		// Make sure the passwords match.
-		if ($user['password'] == $password) {
-			$_SESSION['user'] = $user['email'];
-			$_SESSION['author'] = $user['name'];
+		// Make sure there was a matching email and that the passwords match before starting the session.
+		if (!is_null($user) && $user->get('password') == $password) {
+			session_start();
+			$_SESSION['user'] = $user->get('email');
+			$_SESSION['author'] = $user->get('name');
 			header('Location: '.BASE_URL.'/');
 			exit();
 		} else {
@@ -83,7 +78,7 @@ class SiteController {
 
 	public function logout() {
 		session_destroy();
-		header('Location: '.BASE_URL.'/');
+		header('Location: '.BASE_URL.'/about');
 		exit();
 	}
 
