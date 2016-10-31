@@ -17,6 +17,13 @@
 
 	<body>
 
+		<!-- This is the wrapper for my logo that will display in the top-left of each page. -->
+		<div class="logo">
+			<!-- Source: http://www.unitedwaygso.org/wp-content/uploads/2015/08/education-icon-300x300.png -->
+			<img src="<?= BASE_URL ?>/public/images/education.png" alt="Image Not Found">
+			<span>Edu-Share</span>
+		</div>
+
 		<!-- You never know when we need this variable. -->
 		<script type="text/javascript">var baseURL = '<?= BASE_URL ?>';</script>
 
@@ -53,7 +60,7 @@
 						<!-- We want to filter what elements we have in our navigation bar based on if we are signed in or not. -->
 						<?php
 							if(isset($_SESSION['user'])) {
-								echo '<li id="logout-button"><a href=""><span class="glyphicon glyphicon-log-out"></span> '.$_SESSION['user'].'Logout</a></li>';
+								echo '<li id="logout-button"><a href=""><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>';
 							} else {
 								echo '<li><a href=""><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>';
 								echo '<li><a href="" data-toggle="modal" data-target="#login-modal"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>';

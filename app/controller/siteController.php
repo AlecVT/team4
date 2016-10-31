@@ -77,8 +77,9 @@ class SiteController {
 	}
 
 	public function logout() {
+		echo '<script>alert("asd");</script>';
 		session_destroy();
-		header('Location: '.BASE_URL.'/about');
+		header('Location: '.BASE_URL.'/');
 		exit();
 	}
 

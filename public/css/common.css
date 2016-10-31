@@ -34,6 +34,24 @@ input[type=button]:focus, button[type=button]:focus, a:focus { outline: none; }
 h1 { font-size: 3em; }
 h2 { font-size: 1.5em; }
 
+/*
+	This logo has text displayed to the right of it.
+	The text is centered vertically inside a table-cell format.
+*/
+.logo { margin-bottom: 32px; height: 128px; }
+.logo img {
+	float: left;
+	height: 128px;
+	width: 128px;
+}
+.logo span {
+	display: table-cell;
+	height: 128px;
+	vertical-align: middle;
+	font-size: 2em;
+	font-weight: bold;
+}
+
 /* 
 	The page's content needs to be pushed away from the navigation bar.
 	I also like centered text as a main theme.
