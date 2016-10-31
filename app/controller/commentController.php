@@ -18,6 +18,10 @@ class CommentController {
 			case 'comment':
 				$this->addComment();
 				break;
+			case 'check':
+				$description = $_GET['description'];
+				$this->checkProfanity($description);
+				break;
 
 			// Redirect to home page if all else fails.
 			default:
@@ -48,6 +52,15 @@ class CommentController {
 		$comment->save();
 
 		header('Location: '.BASE_URL.'/post/'.$post);
+	}
+
+	public function checkProfanity($description) {
+		// AJAX fun.
+		$json = file_get_contents("http://www.purgomalum.com/service/containsprofanity?text=".rawurlencode($description));
+
+		// Return the JSON.
+		header('Content-Type: application/json');
+		echo json_encode($json);
 	}
 
 }

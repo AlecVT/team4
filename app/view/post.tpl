@@ -1,3 +1,6 @@
+<!-- Our script for AJAX checking. -->
+<script src="<?= BASE_URL ?>/public/js/profanity.js"></script>
+
 <button id="back-button" name="<?= $post->get('subject') ?>" class="btn btn-default">Back</button>
 
 <!-- Only the author of a post can edit that post. -->
@@ -43,11 +46,11 @@
 				<!-- This is a standard login form for Bootstrap. Using it here for styling purposes. -->
 				<form class="form-login" action="<?= BASE_URL ?>/comment" method="POST">
 					<input name="post" type="text" value="<?= $post->get('id') ?>" style="visibility:hidden;">
-					<label for="inputDescription" class="sr-only">Comment Text</label>
-					<textarea id="inputDescription" name="description" type="text" class="form-control" placeholder="Comment Text" style="resize:none;" required autofocus></textarea>
+					<label for="commentInputDescription" class="sr-only">Comment Text</label>
+					<textarea id="commentInputDescription" name="description" type="text" class="form-control" placeholder="Comment Text" style="resize:none;" required autofocus></textarea>
 					<!-- Include the session author. -->
 					<input id="inputAuthor" name="author" type="text" class="form-control" placeholder="Author" value="<?= $_SESSION['author'] ?>" style="visibility:hidden;">
-					<button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+					<button id="comment-submit-button" class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
 				</form>
 			</div>
 			<div class="modal-footer">

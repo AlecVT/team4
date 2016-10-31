@@ -26,3 +26,4 @@ RewriteRule ^post/edit/(\d+)/?$ app/controller/postController.php?action=editPos
 # Comment
 
 RewriteRule ^comment/?$ app/controller/commentController.php?action=comment [QSA,L]
+RewriteRule ^comment/check/?$ app/controller/commentController.php?action=check [QSA,L]
